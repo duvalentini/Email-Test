@@ -78,3 +78,52 @@ ul {
   opacity: 0.5;
 }
 
+.email-search {
+  padding: 1em;
+  width: 20em;
+  border: 1px solid rgba(127, 127, 127, .5);
+}
+::placeholder {
+  text-align: right;
+  opacity: 0.5;
+  font-size: 1.5em;
+}
+
+.sidebar-divider {
+  border-top: 1px solid rgba(127, 127, 127, .5);
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  padding-left: 0.5em;
+  margin-top: 1.5em;
+}
+
+.sidebar-notification {
+  float: right;
+  display: block;
+  height: 23px;
+  width: 23px;
+  line-height: 23px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: .75em;
+  border: 2px solid rgba(127, 127, 127, .5);
+}
+
+.sidebar-icon {
+  padding-right: .25em;
+}
+
+.sidebar-item {
+  padding: 1em;
+}
+
+.active.sidebar-item {
+  background-color: white;
+  border-left: 2.5px solid #ce5135;
+}
+
+.active.sidebar-item>.sidebar-notification {
+  background-color: #ce5135;
+  color: white;
+  border: 2px solid #ce5135;
+}

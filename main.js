@@ -9,8 +9,17 @@
 */
 
 function render() {
-  // TODO 1: Your Code Here
+  let emails = [];
+  let cursor = 0;
+
+  fetchEmailsFromDatabase(cursor, ({result, next}) => {
+    result.forEach((email) => {emails.push(email)});
+
+    return renderEmails(emails);
+  });
 }
+
+render();
 
 /*
   Emails are of format { author: String, subject: String, body: String }
