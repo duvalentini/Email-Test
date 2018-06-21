@@ -1,6 +1,7 @@
 /*
   TODOs:
   1. Grab all emails using fetchEmailsFromDatabase
+  2. Implement and run the fetched emails through getFilteredEmails
 
   HINTs:
   1. Read documentation for "fetchEmailsFromDatabase" carefully
@@ -9,6 +10,22 @@
 
 function render() {
   // TODO 1: Your Code Here
+}
+
+/*
+  Emails are of format { author: String, subject: String, body: String }
+
+  args:
+    allEmails: [Email], All emails fetched from fetchEmailsFromDatabase
+    searchInputs: [Strings], Inputs to filter allEmails on
+
+  return: [Email]
+          All emails that have at least one mapped value
+          that has any element of searchInputs as a substring
+*/
+
+function getFilteredEmails(allEmails = [], searchInputs = getSearchInputs()) {
+  // TODO 2: Your Code Here
 }
 
 render();
@@ -86,7 +103,13 @@ function renderEmails(emails) {
             </li>`;
   });
 
-  $('#js-email-list')
-    .empty()
-    .append(emailListHtml);
+  $('#js-email-list').empty().append(emailListHtml);
+}
+
+function getSearchInputs() {
+  return [
+    'Bobby Bob',
+    'Let me know if you are planning',
+    'product is the best',
+  ];
 }
