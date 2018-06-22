@@ -8,15 +8,32 @@
   2. Make use of "cursor" and "next" like paging results from APIs
 */
 
-function render() {
-  let emails = [];
-  let cursor = 0;
+function helper(emails, cursor) {
+  let done = false;
 
-  fetchEmailsFromDatabase(cursor, ({result, next}) => {
-    result.forEach((email) => {emails.push(email)});
+  return new Promise((resolve, reject) => {
+    fetchEmailsFromDatabase(cursor, ({result, next}) => {
+      cursor = next;
+      result.forEach((email) => emails.push(email));
 
-    return renderEmails(emails);
+      if(cursor === null) done = true;
+
+      resolve(done);
+    });
+  })
+  .then((done) => {
+    return done ? emails : helper(emails, cursor);
   });
+};
+
+function render() {
+  let cursor = 0;
+  let emails = [];
+
+  helper(emails, cursor)
+    .then((fetchedEmails) => {
+        return renderEmails(getFilteredEmails(fetchedEmails));
+    });
 }
 
 render();
@@ -34,10 +51,16 @@ render();
 */
 
 function getFilteredEmails(allEmails = [], searchInputs = getSearchInputs()) {
-  // TODO 2: Your Code Here
-}
+  let filteredEmails =[];
 
-render();
+  allEmails.forEach((email) => {
+    if(_.intersectionWith(_.values(email), searchInputs, _.includes).length != 0) {
+      filteredEmails.push(email);
+    }
+  });
+
+  return filteredEmails;
+}
 
 //  ------------ Read But Do Not Make Changes Below This Line ------------
 
